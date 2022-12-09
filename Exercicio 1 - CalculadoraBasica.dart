@@ -1,36 +1,37 @@
 class NumericCount {
   double? valueOne;
   double? valueTwo;
-  
-//   NumericCount(this.valueOne, this.valueTwo); 
-  
-  bool verify() {
-    return valueOne != null && valueTwo != null;
-  }
-  
+
+//   NumericCount(this.valueOne, this.valueTwo);
+
+  bool verify() => valueOne != null && valueTwo != null;
+
   double? sum() {
-    if(verify()) {
+    if (verify()) {
       return valueOne! + valueTwo!;
     }
     return null;
   }
+
   double? subtract() {
-    if(verify()) {
+    if (verify()) {
       return valueOne! - valueTwo!;
     }
     return null;
   }
+
   double? divide() {
-    if(verify()) {
-      if(valueOne! > 0 && valueTwo! > 0) {
+    if (verify()) {
+      if (valueOne! > 0 && valueTwo! > 0) {
         return valueOne! / valueTwo!;
       }
     }
     return null;
   }
+
   double? multiply() {
-    if(verify()) {
-      if(valueOne! > 0 && valueTwo! > 0) {
+    if (verify()) {
+      if (valueOne! > 0 && valueTwo! > 0) {
         return valueOne! * valueTwo!;
       }
     }
@@ -46,5 +47,4 @@ void main() {
   print('Subtração: ${numericCount.subtract()}');
   print('Divisão: ${numericCount.divide()}');
   print('Multiplicação: ${numericCount.multiply()}');
-  
 }

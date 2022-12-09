@@ -15,7 +15,7 @@ class HighSchoolCalculator {
   }
 
   num calculatePositiveDelta(num delta) {
-    //num positiveX = -b + math.sqrt(math.pow(-b,2) - 4 * (a * c));
+    //num positiveX = (-b + math.sqrt(math.pow(-b,2) - 4 * (a * c))) / (2 * a!);
     num positiveX = -b! + delta;
     num positive = positiveX / (2 * a!);
     return positive;
@@ -27,6 +27,7 @@ class HighSchoolCalculator {
     return negative;
   }
 
+  //substituto do toString();
   String showResult() {
     if (verify()) {
       if (calculateDelta().isNaN) {

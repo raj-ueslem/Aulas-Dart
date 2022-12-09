@@ -7,17 +7,14 @@ class Shop {
   //
   //double totalValuePay = totalValue * 0.15 * 12;
   //
-  double valuePay(double valueProduct,
-      {int productAmount = 1, int amountInstallments = 1, double? fees}) {
+  double valuePay(double valueProduct, {int productAmount = 1, int amountInstallments = 1, double? fees}) {
     if (fees != null) {
-      return valueProduct * productAmount +
-          (productAmount * valueProduct * fees) * amountInstallments;
+      return valueProduct * productAmount + (productAmount * valueProduct * fees) * amountInstallments;
     }
     return valueProduct * productAmount * amountInstallments;
   }
 
-  String? installments(double? valueProduct,
-      {int productAmount = 1, int amountInstallments = 1, double? fees}) {
+  String? installments(double? valueProduct, {int productAmount = 1, int amountInstallments = 1, double? fees}) {
     if (valueProduct != null) {
       if (amountInstallments > 0 && amountInstallments <= 4) {
         return '${valuePay(valueProduct, productAmount: productAmount, amountInstallments: amountInstallments)}';
@@ -41,12 +38,11 @@ class Shop {
     } else {
       return "Nenhum valor de produto adicionado";
     }
-
     return "Apenas Parcelas 1 a 12!";
   }
 }
 
 void main() {
   final shop = Shop();
-  print(shop.installments(5000, productAmount: 1, amountInstallments: 5));
+  print(shop.installments(5000, amountInstallments: 5, productAmount: 1));
 }
