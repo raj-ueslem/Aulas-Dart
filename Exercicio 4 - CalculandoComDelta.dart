@@ -9,30 +9,15 @@ class HighSchoolCalculator {
     return a != null && b != null && c != null;
   }
 
-  num calculateDelta() {
-    num delta = math.sqrt(math.pow(-b!, 2) - 4 * (a! * c!));
-    return delta;
-  }
+  num calculateDelta() => math.sqrt(math.pow(-b!, 2) - 4 * (a! * c!));
 
-  num calculatePositiveDelta(num delta) {
-    //num positiveX = (-b + math.sqrt(math.pow(-b,2) - 4 * (a * c))) / (2 * a!);
-    num positiveX = -b! + delta;
-    num positive = positiveX / (2 * a!);
-    return positive;
-  }
+  num calculatePositiveDelta(num delta) => (-b! + math.sqrt(math.pow(-b!, 2) - 4 * (a! * c!))) / (2 * a!);
 
-  num calculateNegativeDelta(num delta) {
-    num negativeX = -b! - delta;
-    num negative = negativeX / (2 * a!);
-    return negative;
-  }
+  num calculateNegativeDelta(num delta) => (-b! - math.sqrt(math.pow(-b!, 2) - 4 * (a! * c!))) / (2 * a!);
 
-  //substituto do toString();
   String showResult() {
     if (verify()) {
-      if (calculateDelta().isNaN) {
-        return "A raiz de delta foi zero";
-      } else {
+      if (!calculateDelta().isNaN) {
         if (a != 0) {
           num delta = calculateDelta();
           num x1 = calculatePositiveDelta(delta);
@@ -40,6 +25,8 @@ class HighSchoolCalculator {
           return "Delta: $delta,\nX1 é: $x1,\nX2 é: $x2";
         }
         return "valor de A não pode ser zero";
+      } else {
+        return "A raiz de delta foi zero";
       }
     }
     return "Valor não informado";

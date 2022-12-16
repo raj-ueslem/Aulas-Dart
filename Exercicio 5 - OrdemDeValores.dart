@@ -5,42 +5,25 @@ class NumberInOrder {
 
   String sortedNumbers() {
     if (realValueOne != null && realValueTwo != null && realValueThree != null) {
-      if (realValueOne! >= realValueTwo! && realValueOne! >= realValueThree!) {
-        if (realValueTwo! > realValueThree!) {
-          return '$realValueOne, $realValueTwo, $realValueThree';
-        } else {
-          return '$realValueOne, $realValueThree, $realValueTwo';
-        }
-      } else if (realValueTwo! >= realValueOne! &&
-          realValueTwo! >= realValueThree!) {
-        if (realValueThree! > realValueOne!) {
-          return '$realValueTwo, $realValueThree, $realValueOne';
-        } else {
-          return '$realValueTwo, $realValueOne, $realValueThree';
-        }
-      } else if (realValueThree! > realValueOne! &&
-          realValueThree! > realValueTwo!) {
-        if (realValueTwo! > realValueOne!) {
-          return '$realValueThree, $realValueTwo, $realValueOne';
-        } else {
-          return '$realValueThree, $realValueOne, $realValueTwo';
-        }
+      if (realValueOne! >= realValueTwo! && realValueTwo! >= realValueThree!) {
+        return '$realValueOne, $realValueTwo, $realValueThree';
+      } else if (realValueTwo! > realValueOne! && realValueOne! > realValueThree!) {
+        return '$realValueTwo, $realValueOne, $realValueThree';
+      } else if (realValueThree! > realValueOne! && realValueThree! > realValueTwo! && realValueTwo! > realValueOne!) {
+        return '$realValueThree, $realValueTwo, $realValueOne';
       } else {
-        return "valores iguais";
+        return '$realValueTwo, $realValueThree, $realValueOne ';
       }
-    } else {
-      return "Valores Irregulares";
     }
+    return "Valores Irregulares";
   }
 }
 
 void main() {
   final sortedNumbers = NumberInOrder();
-
   sortedNumbers.realValueOne = 1;
   sortedNumbers.realValueTwo = 2;
-  sortedNumbers.realValueThree = 3;
+  sortedNumbers.realValueThree = 1;
 
   print(sortedNumbers.sortedNumbers());
-  
 }
