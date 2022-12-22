@@ -23,18 +23,14 @@ abstract class People {
   }
 
   @override
-  String toString() {
-    return "\nNome completo Maiúsculo: ${nameInUpperCase()}\nNome completo Minusculo: ${nameInLowerCase()}";
-  }
+  String toString() => "\nNome completo Maiúsculo: ${nameInUpperCase()}\nNome completo Minusculo: ${nameInLowerCase()}";
 }
 
 class Student extends People {
   double? firstNote;
   double? secondNote;
 
-  bool verifyNote() {
-    return !firstNote!.isNaN && firstNote != null && !secondNote!.isNaN && secondNote != null;
-  }
+  bool verifyNote() => !firstNote!.isNaN && firstNote != null && !secondNote!.isNaN && secondNote != null;
 
   Student(String name, String lastname, int code, {this.firstNote, this.secondNote}) : super(name: name, lastname: lastname, code: code);
 
@@ -46,9 +42,7 @@ class Student extends People {
   }
 
   @override
-  String toString() {
-    return 'Calculo de nota: ${calculateStudantNote()} \nCódigo: $code ${super.toString()}';
-  }
+  String toString() => 'Calculo de nota: ${calculateStudantNote()} \nCódigo: $code ${super.toString()}';
 }
 
 class Teacher extends People {
@@ -67,9 +61,7 @@ class Teacher extends People {
   }
 
   @override
-  String toString() {
-    return "\nSalario a receber: ${calculateWages()}\nCódigo: $code ${super.toString()}";
-  }
+  String toString() => "\nSalario a receber: ${calculateWages()}\nCódigo: $code ${super.toString()}";
 }
 
 void main() {
