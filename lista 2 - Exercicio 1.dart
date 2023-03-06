@@ -1,72 +1,53 @@
-abstract class People {
-  int? code;
-  String? name;
-  String? lastname;
+abstract class Person {
+  int code;
+  String name;
+  String lastName;
 
-  People({this.code, this.name, this.lastname});
+  Person({required this.code, required this.name, required this.lastName});
 
-  bool verify() => name != null && lastname != null;
-  bool codeVerify() => !code!.isNaN && code != null;
+  bool validateCode() => !code.isNaN;
 
-  String? nameInUpperCase() {
-    if (verify()) {
-      return '${name!.toUpperCase()} ${lastname!.toUpperCase()}';
-    }
-    return "Valores nulos";
-  }
+  String capitalizedName() => '${name.toUpperCase()} ${lastName.toUpperCase()}';
 
-  String? nameInLowerCase() {
-    if (verify()) {
-      return '${name!.toLowerCase()} ${lastname!.toLowerCase()}';
-    }
-    return "Valores nulos";
-  }
+  String tinyName() => '${name.toLowerCase()} ${lastName.toLowerCase()}';
 
   @override
-  String toString() => "\nNome completo Maiúsculo: ${nameInUpperCase()}\nNome completo Minusculo: ${nameInLowerCase()}";
+  String toString() => "\nNome completo Maiúsculo: ${capitalizedName()}\nNome completo Minusculo: ${tinyName()}";
 }
 
-class Student extends People {
-  double? firstNote;
-  double? secondNote;
+class Student extends Person {
+  double firstGrade;
+  double secondGrade;
 
-  bool verifyNote() => !firstNote!.isNaN && firstNote != null && !secondNote!.isNaN && secondNote != null;
+  Student({required String name, required String lastName, required int code, required this.firstGrade, required this.secondGrade})
+      : super(name: name, lastName: lastName, code: code);
 
-  Student(String name, String lastname, int code, {this.firstNote, this.secondNote}) : super(name: name, lastname: lastname, code: code);
+  bool validateGrade() => !firstGrade.isNegative && !secondGrade.isNegative;
 
-  double? calculateStudantNote() {
-    if (verifyNote()) {
-      return (firstNote! + secondNote!) / 2;
-    }
-    return null;
-  }
+  double? calculateStudentGrade() => (validateGrade()) ? (firstGrade + secondGrade) / 2 : null;
 
   @override
-  String toString() => 'Calculo de nota: ${calculateStudantNote()} \nCódigo: $code ${super.toString()}';
+  String toString() => 'Calculo de nota: ${calculateStudentGrade()} \nCódigo: $code ${super.toString()}';
 }
 
-class Teacher extends People {
-  double? hourValue;
-  double? workedHours;
+class Teacher extends Person {
+  double hourValue;
+  double workedHours;
 
-  bool verifyTeacher() => hourValue != null && !hourValue!.isNaN && workedHours != null && !workedHours!.isNaN;
+  Teacher({required String lastName, required String name, required int code, required this.hourValue, required this.workedHours})
+      : super(name: name, lastName: lastName, code: code);
 
-  Teacher({String? lastname, String? name, int? code, this.hourValue, this.workedHours}) : super(name: name, lastname: lastname, code: code);
+  bool validateTeacher() => !hourValue.isNegative && !workedHours.isNegative;
 
-  double? calculateWages() {
-    if (verifyTeacher()) {
-      return hourValue! * workedHours!;
-    }
-    return null;
-  }
+  double? calculateWages() => (validateTeacher()) ? hourValue * workedHours : null;
 
   @override
   String toString() => "\nSalario a receber: ${calculateWages()}\nCódigo: $code ${super.toString()}";
 }
 
 void main() {
-  final student = Student('Ana', 'Piltover', 28, firstNote: 10, secondNote: 5);
-  final teacher = Teacher(name: 'Gustavo', lastname: 'Junior', code: 500, hourValue: 30, workedHours: 8);
+  final student = Student(name: 'Ana', lastName: 'Piltover', code: 28, firstGrade: 10, secondGrade: 5);
+  final teacher = Teacher(name: 'Gustavo', lastName: 'Junior', code: 500, hourValue: 30, workedHours: 8);
 
   print(student.toString());
   print(teacher.toString());

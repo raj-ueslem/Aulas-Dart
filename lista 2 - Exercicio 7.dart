@@ -1,21 +1,15 @@
 mixin PersonName {
-  String lowCaser(name) {
-    if (name != null) {
-      return name.toUpperCase().substring(0, 3);
-    }
-    return "BAD";
-  }
+  String principalName(String? name) => (name != null) ? name.toUpperCase().substring(0, 3) : "BAD";
 }
 
 class Person with PersonName {
-  String? name;
-  Person(this.name);
+  String name;
+  Person({required this.name});
   @override
-  String toString() => "name: ${lowCaser(name)}";
+  String toString() => "name: ${principalName(name)}";
 }
 
 void main() {
-  final person = Person("josh");
-
+  final person = Person(name: "gustavo");
   print(person);
 }

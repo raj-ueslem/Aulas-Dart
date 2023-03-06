@@ -1,11 +1,9 @@
 class Person {
-  String? name;
+  String name;
 
-  Person(this.name);
+  Person({required this.name});
 
-  Person.fromMap(Map<String, String> map) {
-    name = map['name'] ?? 'Valor nulo';
-  }
+  factory Person.fromMap(Map<String, dynamic> map) => Person(name: map['name']);
   @override
   String toString() => 'nome: $name';
 }

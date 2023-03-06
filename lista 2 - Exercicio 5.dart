@@ -1,17 +1,13 @@
-class Json {
-  int? userId;
-  int? id;
-  String? title;
-  bool? status;
+class Book {
+  int userId;
+  int id;
+  String title;
+  bool status;
 
-  Json(this.id, this.status, this.title, this.userId);
+  Book({required this.id, required this.status, required this.title, required this.userId});
 
-  Json.fromMap(Map<String, dynamic> map) {
-    userId = map['userId'] ?? 0;
-    id = map['id'] ?? 0;
-    title = map['title'] ?? "sem titulo";
-    status = map['status'] ?? false;
-  }
+  factory Book.fromMap(Map<String, dynamic> map) => Book(userId: map['userId'], id: map['id'], title: map['title'], status: map['status']);
+
   @override
   String toString() => "\nId usuario: $userId, \nID: $id, \nTitulo: $title, \nSituação: $status";
 }
@@ -24,10 +20,9 @@ void main() {
     {"userId": 1, "id": 4, "title": "et porro tempora"},
     {"userId": 1, "id": 5, "status": true}
   ];
+  final List<Book> listBook = mock.map((mockElement) => Book.fromMap(mockElement)).toList();
 
-  final List<Json> json = mock.map((jsonElement) => Json.fromMap(jsonElement)).toList();
-
-  for (var json in json) {
+  for (var json in listBook) {
     print(json);
   }
 }
