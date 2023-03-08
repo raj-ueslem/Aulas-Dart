@@ -15,7 +15,7 @@ mixin CpfValidator {
   ];
   String stripRegex = r'[^\d]';
 
-  int validateDigit({required String document}) {
+  int calculateCheckerCpfDigit({required String document}) {
     List<int> cpfNumbers = document.split('').map((document) => int.parse(document, radix: 10)).toList();
     int modulos = cpfNumbers.length + 1;
     List<int> multiplied = [];
@@ -52,8 +52,8 @@ mixin CpfValidator {
       return false;
     }
     String cpfNumbers = document.substring(0, document.length - 2);
-    cpfNumbers += validateDigit(document: cpfNumbers).toString();
-    cpfNumbers += validateDigit(document: cpfNumbers).toString();
+    cpfNumbers += calculateCheckerCpfDigit(document: cpfNumbers).toString();
+    cpfNumbers += calculateCheckerCpfDigit(document: cpfNumbers).toString();
 
     return cpfNumbers.substring(cpfNumbers.length - 2) == document.substring(document.length - 2);
   }
@@ -112,36 +112,32 @@ class Client with CpfValidator, CnpjValidator {
 
   Client({required this.name, required this.type, required this.document});
 
-  factory Client.fromMap(Map<String, dynamic> map) => Client(name: map['name'], type: map['type'], document: map['document']);
+  factory Client.fromMap(Map<String, dynamic> map) => Client(
+    name: map['name'], type: map['type'], document: map['document']);
+  
   String checkDocumentOptionSelected({required String document, required int type}) {
     switch (type) {
       case 1:
-        if (isValidateCpf(document: document) != false) {
-          return "CPF Válido";
-        } else {
-          return "CPF Inválido";
-        }
+        return isValidateCpf(document: document) != false? "CPF Válido":"CPF Inválido";
       case 2:
-        if (isValidateCnpj(document: document) != false) {
-          return "CNPJ Válido";
-        } else {
-          return "CNPJ Inválido";
-        }
+        return isValidateCnpj(document: document) != false? "CNPJ Válido":"CNPJ Inválido";
       default:
         return "Opção inválida";
     }
   }
 
   @override
-  String toString() => "$name, $type, $document, ${checkDocumentOptionSelected(document: document, type: type)}";
+  String toString() => "\nNome: $name, Tipo de documento: $type,"
+  "\nDocumento: $document, ${checkDocumentOptionSelected(document: document, type: type)}";
 }
 
 void main() {
   const mock = [
-    {"name": "Raj", "type": 2, "document": "18.781.203/0001-28"},
-    {"name": "Raj", "type": 2, "document": "187812030001"},
-    {"name": "Raj", "type": 1, "document": "280012389"},
-    {"name": "Raj", "type": 1, "document": "28001238938"}
+    {"name": "Sabrina", "type": 2, "document": "18.781.203/0001-28"},
+    {"name": "Gustavo", "type": 2, "document": "187812030001"},
+    {"name": "Wilsom", "type": 1, "document": "28001238938"},
+    {"name": "Junior", "type": 1, "document": "280.012.389-38"},
+    {"name": "Seraphine", "type": 1, "document": "280.012.389-38"}
   ];
 
   final List<Client> clients = mock.map((element) => Client.fromMap(element)).toList();
